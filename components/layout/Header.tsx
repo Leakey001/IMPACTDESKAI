@@ -3,12 +3,10 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useAuth } from "@/components/providers/AuthProvider";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function Header() {
-  const { user, signInWithGoogle, signOut } = useAuth();
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -61,7 +59,7 @@ export function Header() {
              ImpactDesk AI
           </span>
         </Link>
-        
+
         {/* Center/Right: Desktop Nav Links */}
         <nav className="hidden md:flex items-center gap-[32px] ml-auto mr-[48px]">
           {navLinks.map((link) => {
@@ -85,33 +83,16 @@ export function Header() {
           })}
         </nav>
 
-        {/* Far Right: Actions & Mobile Toggle */}
+        {/* Far Right: CTA & Mobile Toggle */}
         <div className="flex items-center gap-[16px]">
-          {/* Desktop Actions */}
+          {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-[16px]">
-            {user ? (
-              <>
-                <Link
-                  href="/dashboard"
-                  className="text-base font-medium text-neutral-700 hover:text-primary-blue transition-colors duration-300"
-                >
-                  Dashboard
-                </Link>
-                <button
-                  onClick={signOut}
-                  className="rounded-full bg-white border border-neutral-300 text-neutral-900 px-[24px] py-[8px] text-sm font-medium shadow-sm transition-all duration-300 hover:bg-neutral-100 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2"
-                >
-                  Sign Out
-                </button>
-              </>
-            ) : (
-              <Link
-                href="/templates"
-                className="rounded-full bg-primary-blue text-white px-[24px] py-[8px] text-sm font-medium shadow-sm transition-all duration-300 hover:bg-hoverBlue hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2"
-              >
-                Start Free Draft
-              </Link>
-            )}
+            <Link
+              href="/templates"
+              className="rounded-full bg-primary-blue text-white px-[24px] py-[8px] text-sm font-medium shadow-sm transition-all duration-300 hover:bg-hoverBlue hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-blue focus:ring-offset-2"
+            >
+              Start Free Draft
+            </Link>
           </div>
 
           {/* Mobile Toggle Hamburger */}
@@ -153,34 +134,13 @@ export function Header() {
               })}
 
               <div className="pt-[16px] mt-[16px] border-t border-neutral-100">
-                {user ? (
-                  <div className="flex flex-col space-y-[12px]">
-                    <Link
-                      href="/dashboard"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block text-center py-[12px] text-lg font-medium text-neutral-900 hover:text-primary-blue transition-colors"
-                    >
-                      Dashboard
-                    </Link>
-                    <button
-                      onClick={() => {
-                        signOut();
-                        setMobileMenuOpen(false);
-                      }}
-                      className="w-full rounded-full bg-white border border-neutral-300 text-neutral-900 py-[12px] text-lg font-medium shadow-sm transition-all hover:bg-neutral-50"
-                    >
-                      Sign Out
-                    </button>
-                  </div>
-                ) : (
-                  <Link
-                    href="/templates"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="w-full flex justify-center items-center gap-[8px] rounded-full bg-primary-blue text-white py-[12px] text-lg font-medium shadow-sm transition-all hover:bg-hoverBlue"
-                  >
-                    Start Free Draft
-                  </Link>
-                )}
+                <Link
+                  href="/templates"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full flex justify-center items-center gap-[8px] rounded-full bg-primary-blue text-white py-[12px] text-lg font-medium shadow-sm transition-all hover:bg-hoverBlue"
+                >
+                  Start Free Draft
+                </Link>
               </div>
             </div>
           </motion.div>

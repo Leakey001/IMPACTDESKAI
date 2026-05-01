@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useAuth } from "@/components/providers/AuthProvider";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
@@ -208,13 +206,6 @@ export default function TemplatesPage() {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const [previewTemplate, setPreviewTemplate] = useState<TemplateData | null>(null);
-
-  const { user } = useAuth();
-  const router = useRouter();
-
-  // Suppress unused-var warnings — used implicitly by TemplatePreviewModal form
-  void user;
-  void router;
 
   const filteredTemplates = TEMPLATES.filter((t) => {
     const matchesSearch = t.title.toLowerCase().includes(search.toLowerCase());
